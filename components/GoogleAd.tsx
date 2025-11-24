@@ -22,10 +22,11 @@ const GoogleAd: React.FC<GoogleAdProps> = ({
 }) => {
   const [adSlot, setAdSlot] = useState(propAdSlot);
   const [adEnabled, setAdEnabled] = useState<boolean | null>(null);
-
-  // ⭐ FIX 1: ref for <ins>
+  const [isAdLoaded, setIsAdLoaded] = useState(false);
   const adRef = useRef<HTMLModElement | null>(null);
+  const isAdPushed = useRef(false);
 
+  // Initialize ad settings
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -48,19 +49,32 @@ const GoogleAd: React.FC<GoogleAdProps> = ({
     setAdEnabled(isAdEnabled);
   }, [propAdSlot]);
 
-  // ⭐ FIX 2: prevent multiple push() calls
+  // Push ad to AdSense
   useEffect(() => {
-    try {
-      if (adRef.current && !adRef.current.getAttribute("data-loaded")) {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-        adRef.current.setAttribute("data-loaded", "true");
+    if (!adEnabled || !adSlot || isAdPushed.current) return;
+
+    const pushAd = () => {
+      try {
+        if (adRef.current && typeof window !== 'undefined') {
+          // Check if adsbygoogle is loaded
+          if (window.adsbygoogle) {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            isAdPushed.current = true;
+            setIsAdLoaded(true);
+          } else {
+            // Retry after a short delay if script not loaded yet
+            setTimeout(pushAd, 100);
+          }
+        }
+      } catch (error) {
+        console.error('AdSense error:', error);
       }
-    } catch (error) {
-      console.error('AdSense error:', error);
-    }
-  }, [adSlot]);
+    };
 
-
+    // Wait a bit for the ad element to be in DOM
+    const timer = setTimeout(pushAd, 100);
+    return () => clearTimeout(timer);
+  }, [adEnabled, adSlot]);
 
   if (adEnabled === null) return null;
   if (!adEnabled) return null;
@@ -76,20 +90,16 @@ const GoogleAd: React.FC<GoogleAdProps> = ({
   }
 
   return (
-    <div className={`google-ad ${className}`}>
-   
-
-      {/* ⭐ FIX 3: added ref here */}
-    <ins
-      ref={adRef}
-      className="adsbygoogle"
-      style={{ display: "block" }}
-      data-ad-client="ca-pub-5504771682915102"
-      data-ad-slot={adSlot}
-      data-ad-format="auto"
-      data-full-width-responsive="true"
-    />
-
+    <div className={`google-ad ${className}`} style={style}>
+      <ins
+        ref={adRef}
+        className="adsbygoogle"
+        style={{ display: "block", ...style }}
+        data-ad-client="ca-pub-5504771682915102"
+        data-ad-slot={adSlot}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
     </div>
   );
 };

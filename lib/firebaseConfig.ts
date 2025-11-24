@@ -123,7 +123,7 @@ if (typeof window !== "undefined") {
 
   // Set default values
   remoteConfig.defaultConfig = {
-    google_ad_slot: 'slotId',
+    google_ad_slot: '1279565299',
     google_ad_enabled: 'true'
   };
 

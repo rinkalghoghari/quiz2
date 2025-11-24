@@ -97,8 +97,6 @@ const Page = () => {
           <div className="flex justify-center w-full">
             <GoogleAd 
               adSlot="6012909426"
-              className="w-full"
-              style={{ minHeight: '90px' }}
             />
           </div>
         </motion.div>
@@ -226,8 +224,7 @@ const Page = () => {
           <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
             <GoogleAd 
               adSlot="9085919030"
-              className="w-full"
-              style={{ minHeight: '250px' }}
+             
             />
           </div>
         </motion.div>

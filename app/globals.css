@@ -70,3 +70,23 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Force ad container visibility */
+/* Ensure ad containers are properly sized */
+.google-ad {
+  display: block !important;
+  width: 100% !important;
+  min-width: 200px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.google-ad .adsbygoogle {
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Prevent layout shift during ad load */
+.google-ad ins.adsbygoogle[data-ad-status="unfilled"] {
+  display: none !important;
+}

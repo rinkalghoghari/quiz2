@@ -49,8 +49,7 @@ const EarnCoinContent = () => {
           <div className="flex justify-center w-full">
             <GoogleAd 
               adSlot="1011987899"
-              className="w-full"
-              style={{ minHeight: '90px' }}
+            
             />
           </div>
         </motion.div>

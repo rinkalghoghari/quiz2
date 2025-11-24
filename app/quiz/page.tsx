@@ -435,8 +435,7 @@ function QuizPageContent() {
           <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
             <GoogleAd
               adSlot="7170202137"
-              className="w-full"
-              style={{ minHeight: "90px" }}
+            
             />
           </div>
         </div>
@@ -448,8 +447,7 @@ function QuizPageContent() {
           <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
             <GoogleAd
               adSlot="4324423230"
-              className="w-full"
-              style={{ minHeight: "90px" }}
+            
             />
           </div>
         </div>
@@ -636,8 +634,7 @@ const QuizPage = () => {
             <div className="flex justify-center">
               <GoogleAd
                 adSlot="4759661214"
-                className="w-full"
-                style={{ minHeight: '250px' }}
+              
               />
             </div>
           </div>
@@ -648,8 +645,7 @@ const QuizPage = () => {
             <div className="flex justify-center">
               <GoogleAd
                 adSlot="1279565299"
-                className="w-full"
-                style={{ minHeight: '250px' }}
+               
               />
             </div>
           </div>

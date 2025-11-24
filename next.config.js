@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+   reactStrictMode: false
   // Add any other Next.js config options here
 };
 
